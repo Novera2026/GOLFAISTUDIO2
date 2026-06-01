@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#f0f4f2] text-[#1a1a1a] antialiased;
+  }
+}
+
+@layer components {
+  .premium-card {
+    @apply bg-white rounded-[2.5rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.15)] overflow-hidden transition-all duration-500;
+  }
+}

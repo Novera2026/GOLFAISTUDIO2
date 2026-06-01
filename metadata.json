@@ -1,0 +1,7 @@
+{
+  "name": "Remix: GOLFDNA PRO",
+  "description": "High-end fashion AI application for virtual try-ons and multi-angle model collections with DNA consistency locking for faces, bodies, and products.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
