@@ -237,10 +237,8 @@ const App: React.FC = () => {
         const scenarios = [
           { angle: "Full shot mid-swing", expression: "Focused performance", background: "Pristine Emerald Fairway with distance mountains" },
           { angle: "Medium shot holding driver", expression: "Confident elite smile", background: "Luxury Clubhouse Entrance with expensive cars" },
-          { angle: "Walking with golf bag", expression: "Natural relaxed gaze", background: "Beautifully manicured cart path by a lake" },
           { angle: "Seated in golf cart", expression: "Social luxury vibe", background: "Premium resort course during golden hour" },
-          { angle: "Full-body mirror selfie, holding smartphone, clean reflection", expression: "Stylish elite golfer selfie perspective, confident gaze", background: "Luxury golf resort fitting room with modern mirror, high-end warm ambient lighting" },
-          { angle: "Back view swing follow-through", expression: "Graceful movement", background: "Championship Teebox overlooking the ocean" }
+          { angle: "Full-body mirror selfie, holding smartphone, clean reflection", expression: "Stylish elite golfer selfie perspective, confident gaze", background: "Luxury golf resort fitting room with modern mirror, high-end warm ambient lighting" }
         ];
         finalResults = await generateModelCollection(dnaImage[0], productImages, scenarios, dnaLocks, selectedResolution);
       } else {
