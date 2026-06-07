@@ -7,12 +7,11 @@ on:
 
 permissions:
   contents: 'read'
-  id-token: 'write' # BẮT BUỘC để Workload Identity hoạt động
+  id-token: 'write'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Thêm biến môi trường để giải quyết cảnh báo Node.js 24
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
