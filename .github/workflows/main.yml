@@ -27,8 +27,4 @@ jobs:
 
       - name: 'Deploy to Cloud Run'
         run: |
-          gcloud run deploy golf-ai-app \
-            --image gcr.io/964512664154/my-image \
-            --region asia-southeast1 \
-            --platform managed \
-            --allow-unauthenticated
+          gcloud config set project project-d15a0ecc-61b2-40a3-a91
