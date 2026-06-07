@@ -12,6 +12,9 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Thêm biến môi trường để giải quyết cảnh báo Node.js 24
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout mã nguồn
         uses: actions/checkout@v4
@@ -25,8 +28,8 @@ jobs:
 
       - name: 'Deploy to Cloud Run'
         run: |
-          # Bạn hãy sửa lệnh bên dưới cho đúng với tên service và region của bạn
           gcloud run deploy golf-ai-app \
             --image gcr.io/964512664154/my-image \
             --region asia-southeast1 \
-            --platform managed
+            --platform managed \
+            --allow-unauthenticated
