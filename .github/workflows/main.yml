@@ -2,9 +2,9 @@ name: Deploy to Google Cloud
 
 on:
   push:
-   branches:
+    branches:
       - main
-  workflow_dispatch: # Thêm dòng này để kích hoạt nút "Run workflow" thủ công
+  workflow_dispatch: # Kích hoạt nút "Run workflow" thủ công trên giao diện GitHub
 
 permissions:
   contents: 'read'
@@ -28,4 +28,11 @@ jobs:
 
       - name: 'Deploy to Cloud Run'
         run: |
+          # 1. Cấu hình Project ID chính xác từ Google Cloud Console của bạn
           gcloud config set project project-d15a0ecc-61b2-40a3-a91
+          
+          # 2. Tiến hành triển khai ứng dụng lên Cloud Run
+          gcloud run deploy golf-ai-studio \
+            --source . \
+            --region asia-east1 \
+            --allow-unauthenticated
