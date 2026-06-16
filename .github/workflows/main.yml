@@ -2,8 +2,9 @@ name: Deploy to Google Cloud
 
 on:
   push:
-    branches:
+   branches:
       - main
+  workflow_dispatch: # Thêm dòng này để kích hoạt nút "Run workflow" thủ công
 
 permissions:
   contents: 'read'
