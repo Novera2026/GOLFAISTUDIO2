@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Kích hoạt nút "Run workflow" thủ công trên giao diện GitHub
+  workflow_dispatch: # Giữ lại nút "Run workflow" để bạn có thể chủ động bấm chạy thủ công
 
 permissions:
   contents: 'read'
-  id-token: 'write' # BẮT BUỘC để Workload Identity hoạt động
+  id-token: 'write' # BẮT BUỘC để Workload Identity hoạt động ổn định
 
 jobs:
   deploy:
@@ -28,11 +28,9 @@ jobs:
 
       - name: 'Deploy to Cloud Run'
         run: |
-          # 1. Cấu hình Project ID chính xác từ Google Cloud Console của bạn
-          gcloud config set project project-d15a0ecc-61b2-40a3-a91
-          
-          # 2. Tiến hành triển khai ứng dụng lên Cloud Run
+          # Triển khai trực tiếp lên Cloud Run bằng cách chỉ định rõ Project ID
           gcloud run deploy golf-ai-studio \
             --source . \
             --region asia-east1 \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --project project-d15a0ecc-61b2-40a3-a91
