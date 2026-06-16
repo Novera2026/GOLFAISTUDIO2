@@ -28,9 +28,9 @@ jobs:
 
       - name: 'Deploy to Cloud Run'
         run: |
-          # Triển khai trực tiếp lên Cloud Run bằng cách chỉ định rõ Project ID
+          # Triển khai trực tiếp lên Cloud Run bằng cách chỉ định rõ Project ID mới của bạn
           gcloud run deploy golf-ai-studio \
             --source . \
             --region asia-east1 \
             --allow-unauthenticated \
-            --project project-d15a0ecc-61b2-40a3-a91
+            --project project-1d31ccc5-4336-4503-ab8
