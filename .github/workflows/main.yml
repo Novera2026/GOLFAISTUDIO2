@@ -1,36 +1,52 @@
-name: Deploy to Google Cloud
+name: GOLF FASHION AI
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch: # Giữ lại nút "Run workflow" để bạn có thể chủ động bấm chạy thủ công
+    branches: ["main", "master"] # Chạy khi có code mới đẩy lên nhánh main hoặc master
+  workflow_dispatch:
 
 permissions:
-  contents: 'read'
-  id-token: 'write' # BẮT BUỘC để Workload Identity hoạt động ổn định
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - name: Checkout mã nguồn
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          workload_identity_provider: 'projects/964512664154/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
-          service_account: 'ais-gemini-key-fcf8aec67b8c433@964512664154.iam.gserviceaccount.com'
+          node-version: "20"
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build
+        run: npm run build
+        env:
+          # Dòng này sẽ lấy API Key từ Bước 1 bạn đã cài để đưa vào web
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
-      - name: 'Deploy to Cloud Run'
-        run: |
-          # Triển khai trực tiếp lên Cloud Run bằng cách chỉ định rõ Project ID mới của bạn
-          gcloud run deploy golf-ai-studio \
-            --source . \
-            --region asia-east1 \
-            --allow-unauthenticated \
-            --project project-1d31ccc5-4336-4503-ab8
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: GOLF FASHION AI
+        id: nvt91
+        uses: actions/deploy-pages@v4
